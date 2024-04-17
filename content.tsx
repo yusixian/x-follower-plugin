@@ -8,6 +8,7 @@ import type { PlasmoCSConfig, PlasmoGetShadowHostId } from "plasmo"
 import { FaTools } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 
+import AddMember from "~components/AddMember"
 import { toolPanelOpenAtom } from "~store/app"
 import { ThemeProvider } from "~theme"
 
@@ -43,6 +44,7 @@ const PlasmoOverlay = () => {
               transition={{ duration: 0.5, ease: "linear" }}
               className="w-80 fixed left-0 top-8">
               <ExportFollowers />
+              <AddMember />
             </motion.div>
           ) : (
             <motion.div

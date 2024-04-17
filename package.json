@@ -7,14 +7,17 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
     "package": "plasmo package"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.19.1",
+    "@plasmohq/storage": "^1.10.0",
     "antd": "^5.16.2",
     "clsx": "^2.1.0",
     "framer-motion": "^11.1.1",
     "jotai": "^2.8.0",
+    "lodash-es": "^4.17.21",
     "plasmo": "0.85.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

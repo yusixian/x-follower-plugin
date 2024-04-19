@@ -15,7 +15,7 @@ import { useStorage } from "@plasmohq/storage/hook"
 import { PREFIXED_STORAGE_KEY } from "~constants/storage"
 import { useDomHandlers } from "~hooks/useDomHandlers"
 
-const pageSize = 7
+const pageSize = 10
 const AddMember = () => {
   const [list] = useStorage(PREFIXED_STORAGE_KEY.FOLLOW_USER_LIST, [])
   const [inListArr, setInListArr] = useStorage(
@@ -140,8 +140,8 @@ const AddMember = () => {
             align: "center",
             size: "small",
             simple: true,
-            defaultPageSize: pageSize,
             showQuickJumper: true,
+            showSizeChanger: false,
             total: list?.length ?? 0,
             current: page,
             onChange: (pageNum) => setPage(pageNum)

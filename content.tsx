@@ -1,14 +1,17 @@
 import { StyleProvider } from "@ant-design/cssinjs"
 import Button from "antd/es/button"
+import Segmented from "antd/es/segmented"
 import tailwindText from "data-text:~style.css"
 import antdResetCssText from "data-text:antd/dist/reset.css"
 import { AnimatePresence, motion } from "framer-motion"
 import { useAtom } from "jotai"
 import type { PlasmoCSConfig, PlasmoGetShadowHostId } from "plasmo"
-import { FaTools } from "react-icons/fa"
+import { useState } from "react"
+import { FaChevronLeft, FaTools } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 
 import AddMember from "~components/AddMember"
+import ExportListFollowers from "~components/ExportListFollowers"
 import { toolPanelOpenAtom } from "~store/app"
 import { ThemeProvider } from "~theme"
 
@@ -26,9 +29,9 @@ export const getStyle = () => {
   style.textContent = tailwindText + antdResetCssText
   return style
 }
-
 const PlasmoOverlay = () => {
   const [open, setOpen] = useAtom(toolPanelOpenAtom)
+  const [listType, setListType] = useState("listFollowers")
 
   return (
     <ThemeProvider>
@@ -42,8 +45,28 @@ const PlasmoOverlay = () => {
               animate={{ x: 0 }}
               exit={{ x: -100 }}
               transition={{ duration: 0.5, ease: "linear" }}
-              className="w-80 fixed left-0 top-8">
-              <ExportFollowers />
+              className="fixed w-96 left-0 top-8">
+              <div
+                className="absolute z-10 transition rounded-se-lg rounded-es-lg cursor-pointer px-2 inset-y-0 right-0 flex justify-center items-center hover:bg-black/50"
+                onClick={() => {
+                  setOpen(false)
+                }}>
+                <FaChevronLeft />
+              </div>
+              <Segmented
+                options={[
+                  { label: "关注的人", value: "followers" },
+                  { label: "列表关注", value: "listFollowers" }
+                ]}
+                block
+                value={listType}
+                onChange={(value) => setListType(value)}
+              />
+              {listType === "followers" ? (
+                <ExportFollowers />
+              ) : (
+                <ExportListFollowers />
+              )}
               <AddMember />
             </motion.div>
           ) : (

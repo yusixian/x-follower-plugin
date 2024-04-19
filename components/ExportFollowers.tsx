@@ -2,13 +2,13 @@ import Button from "antd/es/button"
 import Card from "antd/es/card"
 import { useSetAtom } from "jotai"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { FaChevronLeft } from "react-icons/fa"
 import { useCopyToClipboard } from "react-use"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
 import { PREFIXED_STORAGE_KEY } from "~constants/storage"
 import { toolPanelOpenAtom } from "~store/app"
+import { isScrollBottom } from "~utils"
 
 const ExportFollowers = () => {
   const [list, setList] = useStorage(PREFIXED_STORAGE_KEY.FOLLOW_USER_LIST, [])
@@ -54,6 +54,9 @@ const ExportFollowers = () => {
         top: window.innerHeight // 滚动一个视口的高度
       })
       setList((prev) => processListItems(prev, list))
+      if (isScrollBottom(document.documentElement ?? document.body)) {
+        setStop(true)
+      }
     }
   }, [])
 
@@ -85,14 +88,7 @@ const ExportFollowers = () => {
   }, [stop])
 
   return (
-    <Card className="px-3 rounded-ss-none rounded-es-none">
-      <div
-        className="absolute transition rounded-se-lg rounded-es-lg cursor-pointer bg-[#141414] px-2 inset-y-0 right-0 flex justify-center items-center hover:brightness-50"
-        onClick={() => {
-          setOpen(false)
-        }}>
-        <FaChevronLeft />
-      </div>
+    <Card className="px-3 rounded-none">
       <div className="flex gap-3 flex-col">
         <Button type="primary" onClick={getAllUsername}>
           Get All Username
@@ -116,7 +112,7 @@ const ExportFollowers = () => {
         </div>
       </div>
       <p className="my-2 text-lg">Count {list?.length ?? 0}</p>
-      <textarea className="overflow-auto h-48 w-full p-2" value={listStr} />
+      <textarea className="overflow-auto h-24 w-full p-2" value={listStr} />
     </Card>
   )
 }

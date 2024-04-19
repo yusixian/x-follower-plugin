@@ -1,5 +1,7 @@
 export const STORAGE_KEY = {
-  FOLLOW_USER_LIST: "follow_user_list"
+  FOLLOW_USER_LIST: "follow_user_list",
+  LISTS_FOLLOW_USER_LIST: "lists_follow_user_list",
+  DISPOSAL_USER_LIST: "disposal_user_list"
 }
 
 type PrefixedStorageKey<T extends Record<keyof T, string>> = {

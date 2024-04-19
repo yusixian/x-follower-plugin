@@ -20,7 +20,7 @@ const ExportListFollowers = () => {
     []
   )
   const setOpen = useSetAtom(toolPanelOpenAtom)
-  const [stop, setStop] = useState(true)
+  const [stop, setStop] = useState(false)
   const timerRef = useRef(null)
 
   const getScrollListEle = () => {

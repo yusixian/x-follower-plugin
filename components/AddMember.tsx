@@ -6,6 +6,7 @@ import List from "antd/es/list"
 import Tag from "antd/es/tag"
 import { useCallback, useMemo, useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
+import { IoClose } from "react-icons/io5"
 import { MdOutlineContentPasteGo } from "react-icons/md"
 import { RiDeleteBin5Fill } from "react-icons/ri"
 
@@ -169,9 +170,21 @@ const AddMember = () => {
                 ) : (
                   <>
                     {isDisposal ? (
-                      <Tag color="red" className="ml-1">
-                        已排除
-                      </Tag>
+                      <>
+                        <Tag color="red" className="ml-1">
+                          已排除
+                        </Tag>
+                        <Button
+                          size="small"
+                          danger
+                          onClick={() => {
+                            setCurIndex(idx)
+                            setDisposalListArr((pre) =>
+                              pre.filter((str) => str !== item)
+                            )
+                          }}
+                          icon={<IoClose />}></Button>
+                      </>
                     ) : (
                       <>
                         <Button

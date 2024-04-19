@@ -81,6 +81,8 @@ const ExportListFollowers = () => {
   const getAllUsername = useCallback(() => {
     setStop(false)
     timerRef.current && clearTimeout(timerRef.current) // 清除现有定时器
+    nextBatch()
+    setTimer()
   }, [setTimer, nextBatch])
 
   const listStr = useMemo(

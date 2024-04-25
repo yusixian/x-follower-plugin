@@ -11,6 +11,7 @@ import { FaChevronLeft, FaTools } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 
 import AddMember from "~components/AddMember"
+import ExportElement from "~components/ExportElement"
 import ExportListFollowers from "~components/ExportListFollowers"
 import { toolPanelOpenAtom } from "~store/app"
 import { ThemeProvider } from "~theme"
@@ -18,7 +19,7 @@ import { ThemeProvider } from "~theme"
 import ExportFollowers from "./components/ExportFollowers"
 
 export const config: PlasmoCSConfig = {
-  matches: ["*://twitter.com/*", "*://x.com/*"]
+  matches: ["*://twitter.com/*", "*://x.com/*", "https://element.market/*"]
 }
 
 const HOST_ID = "engage-csui"
@@ -62,11 +63,12 @@ const PlasmoOverlay = () => {
                 value={listType}
                 onChange={(value) => setListType(value)}
               />
-              {listType === "followers" ? (
+              <ExportElement />
+              {/* {listType === "followers" ? (
                 <ExportFollowers />
               ) : (
                 <ExportListFollowers />
-              )}
+              )} */}
               <AddMember />
             </motion.div>
           ) : (
